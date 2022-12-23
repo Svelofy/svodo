@@ -1,2 +1,8 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+  import AddTodo from "../lib/AddTodo.svelte";
+  import TodoView from "../lib/TodoView.svelte";
+
+</script>
+
+<AddTodo />
+<TodoView />
