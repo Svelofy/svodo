@@ -9,4 +9,14 @@
     }
 </script>
 
-<button on:click={addTodo}>Add TODO</button>
+<div>
+    <button on:click={addTodo}>Add TODO</button>
+</div>
+
+<style>
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>

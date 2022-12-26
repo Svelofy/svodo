@@ -4,6 +4,16 @@
 </script>
 
 {#each $todos as { text, creationDate }}
-    <h1>{text}</h1>
-    <Time timestamp={creationDate} live={15000} relative />
+    <div>
+        <h1>{text}</h1>
+        <Time timestamp={creationDate} live={15000} relative />
+    </div>
 {/each}
+
+<style>
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>

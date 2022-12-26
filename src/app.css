@@ -1,0 +1,25 @@
+* {
+    font-family: Poppins;
+    font-weight: 300;
+    color: white;
+}
+
+html {
+    background: #222222;
+}
+
+button {
+    background: #333333;
+    border-radius: 5px;
+    border: none;
+    font-size: 2rem;
+    transition: 200ms;
+}
+
+button:hover {
+    transform: scale(0.99);
+}
+
+button:active {
+    transform: scale(0.97);
+}
