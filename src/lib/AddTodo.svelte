@@ -4,7 +4,8 @@
     function addTodo(): void {
         $todos = $todos.concat({
             text: `TODO Number ${$todos.length}`,
-            creationDate: new Date()
+            creationDate: new Date(),
+            completed: false,
         })
     }
 </script>
