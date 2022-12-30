@@ -1,13 +1,26 @@
 <script lang="ts">
     import { todos } from "../stores";
     import Time from 'svelte-time';
+    import { scale } from "svelte/transition";
 
     // @ts-ignore
     import Checkbox from 'svelte-checkbox';
+
+    function deleteTodo(index: number): void {
+        // This won't update the UI automatically
+        $todos.splice(index, 1);
+
+        // This will
+        $todos = $todos;
+    }
 </script>
 
 {#each $todos as { text, creationDate }, i}
-    <div>
+    <div in:scale={{
+        start: 0.98,
+        duration: 250,
+        opacity: 0
+    }}>
         <div id='single-line'>
             <Checkbox
                 class='checkbox'
@@ -20,6 +33,8 @@
             <h1>{text}</h1>
         </div>
         <Time timestamp={creationDate} live={15000} relative />
+
+        <button on:click={() => deleteTodo(i)}>Delete</button>
     </div>
 {/each}
 
