@@ -8,6 +8,10 @@
             completed: false,
         })
     }
+
+    $: {
+        localStorage.setItem('todos', JSON.stringify($todos));
+    }
 </script>
 
 <div>

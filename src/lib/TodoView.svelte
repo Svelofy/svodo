@@ -13,6 +13,10 @@
         // This will
         $todos = $todos;
     }
+
+    $: {
+        localStorage.setItem('todos', JSON.stringify($todos));
+    }
 </script>
 
 {#each $todos as { text, creationDate }, i}
