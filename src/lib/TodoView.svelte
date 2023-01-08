@@ -6,12 +6,33 @@
     // @ts-ignore
     import Checkbox from 'svelte-checkbox';
 
+    let isEditing = false;
+    let editingId = -1;
+
     function deleteTodo(index: number): void {
+        if(isEditing) return;
+
         // This won't update the UI automatically
         $todos.splice(index, 1);
 
         // This will
         $todos = $todos;
+    }
+
+    function editTodo(index: number): void {
+        // Done if clicked on the edit button twice
+        // otherwise return / edit
+        if(isEditing) {
+            if(editingId == index) {
+                isEditing = false;
+                editingId = -1;
+            }
+
+            return;
+        }
+
+        isEditing = true;
+        editingId = index;
     }
 
     $: {
@@ -20,30 +41,38 @@
 </script>
 
 {#each $todos as { text, creationDate }, i}
-    <div in:scale={{
+    <div class='flex-container' in:scale={{
         start: 0.98,
         duration: 250,
         opacity: 0
     }}>
-        <div id='single-line'>
-            <Checkbox
-                class='checkbox'
-                bind:checked={$todos[i].completed}
-                primaryColor='white'
-                secondaryColor='#dddddd'
-                size='2.4rem'
-            />
-            
-            <h1>{text}</h1>
+        <div class='flex-container' id='single-line'>
+            {#if editingId == i}
+                <input bind:value={$todos[i].text} />
+            {:else}
+                <Checkbox
+                    class='checkbox'
+                    bind:checked={$todos[i].completed}
+                    primaryColor='white'
+                    secondaryColor='#dddddd'
+                    size='2.4rem'
+                />
+                
+                <h1>{text}</h1>
+            {/if}
         </div>
+
         <Time timestamp={creationDate} live={15000} relative />
 
-        <button on:click={() => deleteTodo(i)}>Delete</button>
+        <div>
+            <button on:click={() => editTodo(i)}>{editingId == i ? 'Done' : 'Edit'}</button>
+            <button on:click={() => deleteTodo(i)}>Delete</button>
+        </div>
     </div>
 {/each}
 
 <style>
-    div {
+    .flex-container {
         display: flex;
         flex-direction: column;
         align-items: center;
